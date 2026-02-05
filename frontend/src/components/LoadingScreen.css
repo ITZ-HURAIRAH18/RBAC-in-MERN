@@ -1,0 +1,352 @@
+/* ==================== LOADING SCREEN ==================== */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.loading-container {
+  text-align: center;
+  animation: slideUp 0.5s ease-out;
+}
+
+/* ==================== WATER CLOCK ==================== */
+.water-clock {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  margin: 0 auto 3rem;
+}
+
+/* Top Container */
+.water-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 3px solid rgba(102, 126, 234, 0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(102, 126, 234, 0.1);
+}
+
+.top-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Water Levels */
+.water-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg,
+      rgba(79, 172, 254, 0.8) 0%,
+      rgba(0, 242, 254, 0.6) 100%);
+  border-radius: 0 0 17px 17px;
+  animation: waterShimmer 2s ease-in-out infinite;
+}
+
+.top-water {
+  height: 100%;
+  animation: drainWater 3s ease-in-out infinite;
+}
+
+.bottom-water {
+  height: 0%;
+  animation: fillWater 3s ease-in-out infinite;
+}
+
+@keyframes drainWater {
+
+  0%,
+  100% {
+    height: 100%;
+  }
+
+  50% {
+    height: 20%;
+  }
+}
+
+@keyframes fillWater {
+
+  0%,
+  100% {
+    height: 0%;
+  }
+
+  50% {
+    height: 80%;
+  }
+}
+
+@keyframes waterShimmer {
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Water Drops */
+.water-drops {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 60px;
+}
+
+.drop {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  background: linear-gradient(180deg,
+      rgba(79, 172, 254, 0.9) 0%,
+      rgba(0, 242, 254, 0.7) 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: dropFall 3s ease-in infinite;
+}
+
+.drop-1 {
+  animation-delay: 0s;
+}
+
+.drop-2 {
+  animation-delay: 1s;
+}
+
+.drop-3 {
+  animation-delay: 2s;
+}
+
+@keyframes dropFall {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 60px;
+    opacity: 0;
+  }
+}
+
+/* Connecting Tube */
+.tube {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.water-flow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(180deg,
+      rgba(79, 172, 254, 0.8) 0%,
+      rgba(0, 242, 254, 0.6) 100%);
+  animation: flowDown 3s ease-in-out infinite;
+}
+
+@keyframes flowDown {
+
+  0%,
+  100% {
+    top: -20px;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 60px;
+    opacity: 0;
+  }
+}
+
+/* Clock Base */
+.clock-base {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 20px;
+  background: linear-gradient(90deg,
+      rgba(102, 126, 234, 0.2) 0%,
+      rgba(102, 126, 234, 0.4) 50%,
+      rgba(102, 126, 234, 0.2) 100%);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* ==================== LOADING TEXT ==================== */
+.loading-text {
+  margin-top: 2rem;
+}
+
+.loading-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loading-subtitle {
+  font-size: 1rem;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+
+/* Loading Dots */
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  animation: dotBounce 1.4s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotBounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .water-clock {
+    transform: scale(0.8);
+  }
+
+  .loading-title {
+    font-size: 1.5rem;
+  }
+
+  .loading-subtitle {
+    font-size: 0.875rem;
+  }
+}
