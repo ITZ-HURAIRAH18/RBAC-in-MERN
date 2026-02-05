@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import ProtectedRoute from "./componenets/ProtectedRoute";
 import UsersPage from "./pages/UsersPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -6,12 +7,23 @@ import ReportsPage from "./pages/ReportsPage";
 import RolesPage from "./pages/RolesPage";
 import Unauthorized from "./pages/Unauthorized";
 import LoginPage from "./pages/LoginPage";
+import LoadingScreen from "./components/LoadingScreen";
 import { useAuth } from "./context/AuthContext";
 import { usePermission } from "./hooks/usePermission";
 import "./App.css";
 
 function App() {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+
+  // Show loading screen for 2 seconds on initial load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Check permissions for navigation
   const canReadUsers = usePermission("read_users");
@@ -28,6 +40,11 @@ function App() {
   const getUserInitials = (email) => {
     return email ? email.charAt(0).toUpperCase() : "U";
   };
+
+  // Show loading screen
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <BrowserRouter>
