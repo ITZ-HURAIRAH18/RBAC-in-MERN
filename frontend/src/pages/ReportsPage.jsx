@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LoadingScreen from "../components/LoadingScreen";
 
 const ReportsPage = () => {
   const [dashboardStats, setDashboardStats] = useState(null);
@@ -42,13 +43,7 @@ const ReportsPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="page-container">
-        <div className="page-content">
-          <p style={{ textAlign: "center", color: "var(--light-text-muted)" }}>Loading reports...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

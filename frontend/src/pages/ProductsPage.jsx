@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { usePermission } from "../hooks/usePermission";
+import LoadingScreen from "../components/LoadingScreen";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -99,13 +100,7 @@ const ProductsPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="page-container">
-        <div className="page-content">
-          <p style={{ textAlign: "center", color: "var(--light-text-muted)" }}>Loading...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

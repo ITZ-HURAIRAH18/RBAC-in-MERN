@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LoadingScreen from "../components/LoadingScreen";
 
 const RolesPage = () => {
   const [roles, setRoles] = useState([]);
@@ -101,13 +102,7 @@ const RolesPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="page-container">
-        <div className="page-content">
-          <p style={{ textAlign: "center", color: "var(--light-text-muted)" }}>Loading...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
