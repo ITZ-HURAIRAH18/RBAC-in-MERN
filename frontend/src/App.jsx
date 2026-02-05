@@ -49,7 +49,7 @@ function App() {
   return (
     <BrowserRouter>
       {user && (
-        <nav className="navbar animate-fade-in">
+        <nav className="navbar animate-fade-in" >
           <div className="navbar-container">
             <div className="navbar-links">
               <div className="navbar-logo">

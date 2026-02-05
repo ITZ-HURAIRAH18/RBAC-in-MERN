@@ -235,11 +235,11 @@ const UsersPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 1000,
+          zIndex: 2000,
           padding: "1rem",
           overflowY: "auto"
         }}>
-          <div className="card animate-scale-in" style={{ maxWidth: "600px", width: "100%", margin: "auto" }}>
+          <div className="card animate-scale-in" style={{ maxWidth: "600px", width: "100%", margin: "auto", maxHeight: "90vh", overflowY: "auto" }}>
             <div className="card-header">
               <h2 className="card-title">{editingUser ? "Edit User" : "Add New User"}</h2>
             </div>

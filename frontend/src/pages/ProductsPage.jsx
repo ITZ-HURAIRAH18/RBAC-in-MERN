@@ -220,10 +220,10 @@ const ProductsPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 1000,
+          zIndex: 2000,
           padding: "1rem"
         }}>
-          <div className="card animate-scale-in" style={{ maxWidth: "500px", width: "100%", margin: 0 }}>
+          <div className="card animate-scale-in" style={{ maxWidth: "500px", width: "100%", margin: 0, maxHeight: "90vh", overflowY: "auto" }}>
             <div className="card-header">
               <h2 className="card-title">{editingProduct ? "Edit Product" : "Add New Product"}</h2>
             </div>

@@ -100,14 +100,14 @@ const LoginPage = () => {
 
           <div className="divider"></div>
 
-          <div className="info-box">
+          {/* <div className="info-box">
             <p className="info-box-title">Test Credentials</p>
             <div className="info-box-content">
               <p><strong>Admin:</strong> admin@test.com / password123</p>
               <p><strong>User:</strong> user@test.com / password123</p>
               <p><strong>Manager:</strong> manager@test.com / password123</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
