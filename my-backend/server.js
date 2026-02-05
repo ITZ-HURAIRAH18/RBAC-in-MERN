@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/products.js";
 import reportRoutes from "./routes/reports.js";
 import roleRoutes from "./routes/roles.js";
+import salesRoutes from "./routes/sales.js";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use("/api/users", admin);
 app.use("/api/products", productRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/roles", roleRoutes);
+app.use("/api/sales", salesRoutes);
 console.log("Routes loaded successfully");
 
 // Error handling middleware

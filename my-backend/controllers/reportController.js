@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Product from "../models/Product.js";
+import Sale from "../models/Sale.js";
 import Role from "../models/Role.js";
 import Permission from "../models/Permission.js";
 
@@ -69,25 +70,46 @@ export const getProductReport = async (req, res) => {
   }
 };
 
-// Get sales summary (mock data for now)
+// Get sales summary
 export const getSalesSummary = async (req, res) => {
   try {
-    const products = await Product.find();
+    // Get all completed sales
+    const sales = await Sale.find({ status: "completed" })
+      .populate("product", "name");
     
-    const summary = {
-      totalRevenue: products.reduce((sum, p) => sum + (p.price * Math.floor(Math.random() * 10)), 0),
-      totalOrders: Math.floor(Math.random() * 100) + 50,
-      averageOrderValue: 0,
-      topProducts: products.slice(0, 5).map(p => ({
-        name: p.name,
-        sales: Math.floor(Math.random() * 50) + 10
-      }))
-    };
+    // Calculate total revenue
+    const totalRevenue = sales.reduce((sum, sale) => sum + sale.totalAmount, 0);
+    
+    // Total orders
+    const totalOrders = sales.length;
+    
+    // Average order value
+    const averageOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+    
+    // Calculate top products by sales
+    const productSales = {};
+    sales.forEach(sale => {
+      const productName = sale.product?.name || "Unknown Product";
+      if (!productSales[productName]) {
+        productSales[productName] = 0;
+      }
+      productSales[productName] += sale.quantity;
+    });
+    
+    // Sort and get top 5 products
+    const topProducts = Object.entries(productSales)
+      .map(([name, sales]) => ({ name, sales }))
+      .sort((a, b) => b.sales - a.sales)
+      .slice(0, 5);
 
-    summary.averageOrderValue = summary.totalRevenue / summary.totalOrders;
-
-    res.json(summary);
+    res.json({
+      totalRevenue: totalRevenue.toFixed(2),
+      totalOrders,
+      averageOrderValue: averageOrderValue.toFixed(2),
+      topProducts
+    });
   } catch (error) {
+    console.error("getSalesSummary error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

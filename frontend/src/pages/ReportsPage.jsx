@@ -189,7 +189,7 @@ const ReportsPage = () => {
                   <div className="glass-effect" style={{ padding: "1.5rem", borderRadius: "var(--radius-lg)" }}>
                     <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>💰</div>
                     <div style={{ fontSize: "2rem", fontWeight: "700", color: "var(--accent-green)" }}>
-                      ${salesSummary.totalRevenue.toFixed(2)}
+                      ${salesSummary.totalRevenue}
                     </div>
                     <div style={{ color: "var(--light-text-muted)", fontSize: "0.875rem" }}>Total Revenue</div>
                   </div>
@@ -205,7 +205,7 @@ const ReportsPage = () => {
                   <div className="glass-effect" style={{ padding: "1.5rem", borderRadius: "var(--radius-lg)" }}>
                     <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>📈</div>
                     <div style={{ fontSize: "2rem", fontWeight: "700", color: "var(--accent-purple)" }}>
-                      ${salesSummary.averageOrderValue.toFixed(2)}
+                      ${salesSummary.averageOrderValue}
                     </div>
                     <div style={{ color: "var(--light-text-muted)", fontSize: "0.875rem" }}>Avg Order Value</div>
                   </div>

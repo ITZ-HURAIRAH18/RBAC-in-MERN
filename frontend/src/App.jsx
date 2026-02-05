@@ -8,6 +8,7 @@ import RolesPage from "./pages/RolesPage";
 import Unauthorized from "./pages/Unauthorized";
 import LoginPage from "./pages/LoginPage";
 import LoadingScreen from "./components/LoadingScreen";
+import Navbar from "./components/Navbar";
 import { useAuth } from "./context/AuthContext";
 import { usePermission } from "./hooks/usePermission";
 import "./App.css";
@@ -31,16 +32,6 @@ function App() {
   const canViewReports = usePermission("view_reports");
   const canManageRoles = usePermission("manage_roles");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
-
-  // Get user initials for avatar
-  const getUserInitials = (email) => {
-    return email ? email.charAt(0).toUpperCase() : "U";
-  };
-
   // Show loading screen
   if (loading) {
     return <LoadingScreen />;
@@ -48,54 +39,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {user && (
-        <nav className="navbar animate-fade-in" >
-          <div className="navbar-container">
-            <div className="navbar-links">
-              <div className="navbar-logo">
-                🚀 MERN RBAC
-              </div>
-              <Link to="/" className="navbar-link">
-                🏠 Home
-              </Link>
-              {canReadUsers && (
-                <Link to="/users" className="navbar-link">
-                  👥 Users
-                </Link>
-              )}
-              {canReadProducts && (
-                <Link to="/products" className="navbar-link">
-                  📦 Products
-                </Link>
-              )}
-              {canViewReports && (
-                <Link to="/reports" className="navbar-link">
-                  📊 Reports
-                </Link>
-              )}
-              {canManageRoles && (
-                <Link to="/roles" className="navbar-link">
-                  🔐 Roles
-                </Link>
-              )}
-            </div>
-            <div className="navbar-user-section">
-              <div className="navbar-user-info">
-                <div className="navbar-user-avatar">
-                  {getUserInitials(user.email)}
-                </div>
-                <span className="navbar-user-email">{user.email}</span>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="btn btn-danger"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </nav>
-      )}
+      {user && <Navbar />}
 
       <Routes>
         <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />

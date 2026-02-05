@@ -19,7 +19,10 @@ A **full-stack MERN application** with **Role-Based Access Control (RBAC)** feat
 - ✅ JWT Authentication
 - ✅ 10 Granular Permissions
 - ✅ 5 Pre-configured Roles
-- ✅ Full CRUD for Users, Products, Reports, and Roles
+- ✅ Full CRUD for Users, Products, Reports, Roles, and Sales
+- ✅ Real Sales Tracking & Analytics
+- ✅ Professional AH Logo
+- ✅ Permission-Based Navigation
 - ✅ Premium Dark Theme UI
 - ✅ Animated Water Clock Loading Screen
 - ✅ Responsive Design
@@ -31,16 +34,17 @@ A **full-stack MERN application** with **Role-Based Access Control (RBAC)** feat
 ### Backend (Node.js + Express + MongoDB)
 - **Authentication**: JWT-based with bcrypt password hashing
 - **Authorization**: Permission-based middleware
-- **Models**: User, Role, Permission, Product
-- **Controllers**: User, Product, Role, Report management
+- **Models**: User, Role, Permission, Product, Sale
+- **Controllers**: User, Product, Role, Report, Sale management
 - **API Routes**: Protected endpoints with permission checks
+- **Real Sales Tracking**: Actual sales data with revenue analytics
 
 ### Frontend (React + Vite)
-- **Pages**: Login, Users, Products, Reports, Roles, Unauthorized
-- **Components**: ProtectedRoute, LoadingScreen
+- **Pages**: Login, Users, Products, Reports, Roles, Sales, Unauthorized
+- **Components**: ProtectedRoute, LoadingScreen, Navbar, Logo
 - **Context**: AuthContext for global authentication state
 - **Hooks**: usePermission for permission checking
-- **Design**: Premium dark theme with glassmorphism
+- **Design**: Premium dark theme with glassmorphism and professional logo
 
 ---
 
@@ -69,6 +73,7 @@ Seed the database:
 ```bash
 node seed.js
 ```
+*This creates 10 permissions, 5 roles, 3 test users, 5 products, and 8 sales records.*
 
 Start the server:
 ```bash
@@ -142,6 +147,20 @@ Frontend runs on: `http://localhost:5173`
   stock: Number,
   status: String,
   createdBy: ObjectId // Reference to User
+}
+```
+
+#### Sale
+```javascript
+{
+  product: ObjectId, // Reference to Product
+  quantity: Number,
+  price: Number,
+  totalAmount: Number,
+  customer: String,
+  soldBy: ObjectId, // Reference to User
+  status: String, // completed, pending, cancelled
+  createdAt: Date
 }
 ```
 
@@ -270,12 +289,34 @@ Request:
 **PUT** `/api/roles/:id` - Requires `manage_roles`
 **DELETE** `/api/roles/:id` - Requires `manage_roles`
 
+### Sales (Protected)
+
+**GET** `/api/sales` - Requires `read_products`
+**POST** `/api/sales` - Requires `create_products`
+**DELETE** `/api/sales/:id` - Requires `delete_products`
+
 ### Reports (Protected)
 
 **GET** `/api/reports/dashboard` - Requires `view_reports`
 **GET** `/api/reports/users` - Requires `view_reports`
 **GET** `/api/reports/products` - Requires `view_reports`
 **GET** `/api/reports/sales` - Requires `view_reports`
+
+**Sales Summary Response:**
+```json
+{
+  "totalRevenue": "14519.00",
+  "totalOrders": 8,
+  "averageOrderValue": "1814.88",
+  "topProducts": [
+    {
+      "name": "Wireless Headphones",
+      "quantitySold": 15,
+      "revenue": "3749.25"
+    }
+  ]
+}
+```
 
 ---
 
@@ -396,20 +437,23 @@ MERN Setup/
 │   │   ├── userController.js
 │   │   ├── productController.js
 │   │   ├── roleController.js
-│   │   └── reportController.js
+│   │   ├── reportController.js
+│   │   └── saleController.js
 │   ├── middleware/
 │   │   └── auth.js
 │   ├── models/
 │   │   ├── User.js
 │   │   ├── Role.js
 │   │   ├── Permission.js
-│   │   └── Product.js
+│   │   ├── Product.js
+│   │   └── Sale.js
 │   ├── routes/
 │   │   ├── auth.js
 │   │   ├── admin.js
 │   │   ├── products.js
+│   │   ├── reports.js
 │   │   ├── roles.js
-│   │   └── reports.js
+│   │   └── sales.js
 │   ├── .env
 │   ├── server.js
 │   ├── seed.js
@@ -427,9 +471,10 @@ MERN Setup/
 │   │   ├── components/
 │   │   │   ├── ProtectedRoute.jsx
 │   │   │   ├── LoadingScreen.jsx
-│   │   │   └── LoadingScreen.css
-│   │   ├── componenets/
-│   │   │   └── ProtectedRoute.jsx
+│   │   │   ├── LoadingScreen.css
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Navbar.css
+│   │   │   └── Logo.jsx
 │   │   ├── context/
 │   │   │   └── AuthContext.jsx
 │   │   ├── hooks/
@@ -466,6 +511,13 @@ MERN Setup/
 - ✅ Stock tracking
 - ✅ Status management (active/inactive)
 
+### Sales Management
+- ✅ Record new sales transactions
+- ✅ Track product sales
+- ✅ Customer information
+- ✅ Real-time revenue calculation
+- ✅ Sales history
+
 ### Role Management
 - ✅ Create custom roles
 - ✅ Assign permissions to roles
@@ -476,16 +528,20 @@ MERN Setup/
 - ✅ Dashboard statistics
 - ✅ User reports
 - ✅ Product reports
-- ✅ Sales summary
+- ✅ Real sales tracking (not demo data)
+- ✅ Revenue analytics ($14,519 from 8 sales)
+- ✅ Top products by quantity sold
+- ✅ Average order value calculation
 - ✅ Tabbed interface
 
 ### UI/UX
 - ✅ Premium dark theme
+- ✅ Professional "AH" logo with gradient
+- ✅ Permission-based navbar (only shows accessible links)
 - ✅ Glassmorphism effects
 - ✅ Smooth animations
 - ✅ Responsive design
 - ✅ Water clock loading screen
-- ✅ Permission-based navigation
 - ✅ Modal forms
 - ✅ Color-coded badges
 

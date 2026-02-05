@@ -45,13 +45,21 @@ const UsersPage = () => {
   const fetchRoles = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/roles", {
+      const response = await fetch("http://localhost:5000/api/users/roles-list", {
         headers: { Authorization: `Bearer ${token}` }
       });
+      
+      if (!response.ok) {
+        console.error("Failed to fetch roles");
+        setRoles([]);
+        return;
+      }
+      
       const data = await response.json();
-      setRoles(data || []);
+      setRoles(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching roles:", error);
+      setRoles([]);
     }
   };
 

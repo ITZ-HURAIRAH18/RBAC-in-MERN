@@ -28,10 +28,25 @@ const RolesPage = () => {
         })
       ]);
 
-      setRoles(await rolesRes.json());
-      setPermissions(await permsRes.json());
+      if (rolesRes.ok) {
+        const rolesData = await rolesRes.json();
+        setRoles(Array.isArray(rolesData) ? rolesData : []);
+      } else {
+        console.error("Failed to fetch roles:", rolesRes.status);
+        setRoles([]);
+      }
+
+      if (permsRes.ok) {
+        const permsData = await permsRes.json();
+        setPermissions(Array.isArray(permsData) ? permsData : []);
+      } else {
+        console.error("Failed to fetch permissions:", permsRes.status);
+        setPermissions([]);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
+      setRoles([]);
+      setPermissions([]);
     } finally {
       setLoading(false);
     }
