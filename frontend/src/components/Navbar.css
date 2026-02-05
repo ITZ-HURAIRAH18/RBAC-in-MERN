@@ -1,0 +1,25 @@
+/* Navbar Component Styles - Override App.css */
+nav[style] {
+  background: white !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  padding: 1rem 2rem !important;
+}
+
+nav[style] span {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+nav[style] a {
+  color: #5b6ee8 !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+nav[style] a:hover {
+  color: #4050d0 !important;
+}
+
+nav[style] button {
+  opacity: 1 !important;
+}
